@@ -11,7 +11,7 @@ namespace Patch.ImageCoverExpander
 {
     public class ImageCoverExpanderPatch : IPostBuildPlayerScriptDLLs
     {
-        public int callbackOrder => 1;
+        public int callbackOrder => 0;
 
         public void OnPostBuildPlayerScriptDLLs(BuildReport report)
         {
@@ -41,6 +41,8 @@ namespace Patch.ImageCoverExpander
                     Debug.LogError("Failed to get parent path for: " + mainAssemblyPath);
                     return;
                 }
+                
+                resolver.AddSearchDirectory(assemblyParentPath.FullName);
             
                 using (var modAssembly = AssemblyDefinition.ReadAssembly(modAssemblyPath,
                            new ReaderParameters { ReadWrite = true, InMemory = true, AssemblyResolver = resolver }))
@@ -57,8 +59,7 @@ namespace Patch.ImageCoverExpander
                         if (patchType is null)
                             return;
         
-                        // TODO: Replace with OnEnable or Awake
-                        var patchMethod = PatchUtils.GetMethod(patchType, "RefreshContent");
+                        var patchMethod = PatchUtils.GetMethod(patchType, "OnEnable");
         
                         if (patchMethod is null)
                             return;
@@ -87,8 +88,7 @@ namespace Patch.ImageCoverExpander
                         assembly.Write(mainAssemblyPath);
                     }
                 }
-    
-
+                
                 Debug.Log("ImageCoverExpander: Modification completed.");
             }
             catch (Exception ex)

@@ -1,2 +1,2 @@
-# ImageCoverExpander_POC
-POC of ImageCoverExpander mod for CrossQuestBS
+# ImageCoverExpander
+ImageCoverExpander mod for CrossQuestBS

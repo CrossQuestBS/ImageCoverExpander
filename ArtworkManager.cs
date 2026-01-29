@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class ArtworkManager : ICrossPatch
 {
+    private static Vector2 ExpandedSizeDelta => new (70.5f, 58f);
+    private static Vector3 ExpandedPosition => new (-34.4f, -56f, 0f);
+
     [CrossPostfix]
     [CrossPatch(typeof(StandardLevelDetailView), "OnEnable", new Type[0])]
     public static void UpdateArtwork(StandardLevelDetailView _instance)
@@ -16,8 +19,8 @@ public class ArtworkManager : ICrossPatch
         imageView._skew = 0.0f;
 
         RectTransform image = imageView.rectTransform;
-        image.sizeDelta = new Vector2(70.5f, 58f);
-        image.localPosition = new Vector3(-34.4f, -56f, 0f);
+        image.sizeDelta = ExpandedSizeDelta;
+        image.localPosition = ExpandedPosition;
         image.SetAsFirstSibling();
     }
 }

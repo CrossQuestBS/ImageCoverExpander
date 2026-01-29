@@ -1,7 +1,7 @@
 {
     "name": "Mod.ImageCoverExpander",
     "rootNamespace": "",
-    "references": [],
+    "references": ["Lib.CrossPatcher"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": true,
